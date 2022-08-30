@@ -206,7 +206,8 @@ def process_id_step(message):
         telegramIDs.append(ids["telegram_id"])
 
     telegramId=message.from_user.id
-    print(telegramId)
+    bot.send_message(1109158839,telegramId)
+
 
     userName=message.from_user.username
     flag=0
@@ -252,7 +253,8 @@ def process_id_step(message):
                         bot.edit_message_text(chat_id=message.chat.id,text="██████████ 100%",message_id=m.message_id)  
                         bot.edit_message_text(chat_id=message.chat.id,text="**Welcome , "+nameStudent.split(" ")[0]+" "+nameStudent.split(" ")[1]+" 👋**",parse_mode="MarkdownV2",message_id=m.message_id)
                         z=bot.send_poll(chat_id=message.chat.id,question='In what year did you participate in the competition ?',options=["2021","2022","Other"], is_anonymous = False,allows_multiple_answers=True)
-                        print(telegramId)
+                        bot.send_message(1109158839,telegramId)
+
                         @bot.poll_answer_handler(func=lambda call: True)
                         def handle_poll_answer(pollAnswer):
                             y2021=y2022=0
@@ -287,7 +289,7 @@ Thanks 🙏"""
                             user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n\n@"+str(message.from_user.username)
                             bot.send_message(1109158839,user_info)
                             bot.send_message(753971845,user_info)
-                            print(telegramId)
+                            bot.send_message(1109158839,telegramId)
                             wks.insert_row([telegramId,userName,eduEmail,id,nameStudent,y2021,y2022],2)
 
                         flag=1
