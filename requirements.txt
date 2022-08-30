@@ -1,4 +1,4 @@
 pyTelegramBotAPI
-gspreed
+gspread
 requests
 beautifulsoup4
