@@ -201,9 +201,13 @@ def process_id_step(message):
     elif (message.text=="/login"):
         login(message)
         return
+
     for ids in wks.get_all_records():
         telegramIDs.append(ids["telegram_id"])
+
     telegramId=message.from_user.id
+    print(telegramId)
+
     userName=message.from_user.username
     flag=0
     c=0
@@ -247,14 +251,15 @@ def process_id_step(message):
                         # print(nameStudent)
                         bot.edit_message_text(chat_id=message.chat.id,text="██████████ 100%",message_id=m.message_id)  
                         bot.edit_message_text(chat_id=message.chat.id,text="**Welcome , "+nameStudent.split(" ")[0]+" "+nameStudent.split(" ")[1]+" 👋**",parse_mode="MarkdownV2",message_id=m.message_id)
-                        bot.send_poll(chat_id=message.chat.id,question='In what year did you participate in the competition ?',options=["2021","2022","Other"], is_anonymous = False,allows_multiple_answers=True)
+                        z=bot.send_poll(chat_id=message.chat.id,question='In what year did you participate in the competition ?',options=["2021","2022","Other"], is_anonymous = False,allows_multiple_answers=True)
+                        print(telegramId)
                         @bot.poll_answer_handler(func=lambda call: True)
                         def handle_poll_answer(pollAnswer):
                             y2021=y2022=0
                             for i in pollAnswer.option_ids:
                                 if i==0 : y2021=1
                                 elif i==1 : y2022=1
-                            wks.insert_row([telegramId,userName,eduEmail,id,nameStudent,y2021,y2022],2)
+
                             # channel_link = bot.create_chat_invite_link(chat_id=CHANNEL_ID,member_limit=1).invite_link
                             # group_link  = bot.create_chat_invite_link(chat_id=GROUP_ID,member_limit=1).invite_link
                             # problem_link  = bot.create_chat_invite_link(chat_id=PROBLEMC_ID,member_limit=1).invite_link
@@ -282,6 +287,9 @@ Thanks 🙏"""
                             user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n\n@"+str(message.from_user.username)
                             bot.send_message(1109158839,user_info)
                             bot.send_message(753971845,user_info)
+                            print(telegramId)
+                            wks.insert_row([telegramId,userName,eduEmail,id,nameStudent,y2021,y2022],2)
+
                         flag=1
                         
                     except : 
