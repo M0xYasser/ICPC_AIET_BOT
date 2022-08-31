@@ -278,7 +278,7 @@ Thanks 🙏"""
         bot.send_message(chat_id=message.chat.id,text=links)
         user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n\n@"+str(message.from_user.username)
         bot.send_message(1109158839,user_info)
-        #bot.send_message(753971845,user_info)
+        bot.send_message(753971845,user_info)
     except :
         err="""
 ❌ حدث خطأ غير متوقع 
