@@ -263,7 +263,7 @@ Your login has been accepted by the admin.
 We have 3 way for communications.
 
 1- Main channel: 
-https://t.me/+M9dOdt8JBm0xMDE0
+https://t.me/icpcaiet
 
 2- Community group:
 https://t.me/+hrrAxNNNkyUyMGI0
