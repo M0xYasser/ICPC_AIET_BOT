@@ -331,7 +331,11 @@ def approve (message):
             time.sleep(5)
             bot.delete_message(x.chat.id,x.message_id)
             bot.delete_message(x.chat.id,x.reply_to_message.id)
-
+    else:
+        x=bot.reply_to(message, "❌ This command for ADMINS only")
+        time.sleep(5)
+        bot.delete_message(x.chat.id,x.message_id)
+        bot.delete_message(x.chat.id,x.reply_to_message.id)
 
 ##############################################################
 # HOME
