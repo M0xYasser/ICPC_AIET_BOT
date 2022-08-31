@@ -305,7 +305,7 @@ def question (message):
                 bot.delete_message(message.chat.id,thx.message_id)
             else :
                 telegramIDs.clear()
-                s=bot.reply_to(message,text="You are not logged in the bot yet 😢\nLogin >> @ICPC_AIET_BOT")   
+                s=bot.reply_to(message,text="You are not logged in the bot yet 😢\nLogin >> @ICPCAIET_bot")   
                 time.sleep(5)
                 bot.delete_message(s.chat.id,message.message_id)
                 bot.delete_message(s.chat.id,s.message_id)
