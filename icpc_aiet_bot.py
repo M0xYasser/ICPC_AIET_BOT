@@ -207,7 +207,12 @@ def process_id_step(message):
                         bot.edit_message_text(chat_id=message.chat.id,text="██████████ 100%",message_id=m.message_id)  
                         bot.edit_message_text(chat_id=message.chat.id,text="**Welcome , "+nameStudent.split(" ")[0]+" "+nameStudent.split(" ")[1]+" 👋**",parse_mode="MarkdownV2",message_id=m.message_id)
                         wks.insert_row([telegramId,userName,eduEmail,id,nameStudent,0,0],2)
-                        msg = bot.send_message(chat_id=message.chat.id,text=" 2021 >> 1 2022 >> 2 all >>3 not >>4 ")
+                        pollq="""In what year did you participate in the competition?
+If in 2021 send number 1
+If in 2022 send number 2
+If you participated in the two years, send number 3
+And if you haven't participated before, send number 4"""
+                        msg = bot.send_message(chat_id=message.chat.id,text=pollq)
                         bot.register_next_step_handler(msg, poll)
                         flag=1
                         
@@ -273,7 +278,7 @@ Thanks 🙏"""
         bot.send_message(chat_id=message.chat.id,text=links)
         user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n\n@"+str(message.from_user.username)
         bot.send_message(1109158839,user_info)
-        bot.send_message(753971845,user_info)
+        #bot.send_message(753971845,user_info)
     except :
         err="""
 ❌ حدث خطأ غير متوقع 
@@ -283,7 +288,12 @@ Thanks 🙏"""
 🐞 اذا واجهتك اي مشكلة او تريد الابلاغ عن مشكلة فيمكنك التواصل معي عن طريق المعرف   ⬅️ @M0xYasser
         """
         bot.reply_to(message, err)
-        msg = bot.send_message(chat_id=message.chat.id,text=" 2021 >> 1 2022 >> 2 all >>3 not >>4 ")
+        pollq="""In what year did you participate in the competition?
+If in 2021 send number 1
+If in 2022 send number 2
+If you participated in the two years, send number 3
+And if you haven't participated before, send number 4"""
+        msg = bot.send_message(chat_id=message.chat.id,text=pollq)
         bot.register_next_step_handler(msg, poll)
 
 ##############################################################
