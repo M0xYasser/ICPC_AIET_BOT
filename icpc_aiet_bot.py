@@ -310,6 +310,7 @@ def question (message):
                 telegramIDs.clear()
                 bot.send_message(GROUP_ID2,message.reply_to_message.text+"\n\n__________\n\nBY : "+get_name_from_gs(message.reply_to_message.from_user.id).split(" ")[0]+" "+get_name_from_gs(message.reply_to_message.from_user.id).split(" ")[1])
                 thx=bot.reply_to(message.reply_to_message, "thx for your question 🤍")
+                time.sleep(3)
                 bot.delete_message(message.chat.id,message.reply_to_message.message_id)
                 bot.delete_message(message.chat.id,message.message_id)
                 bot.delete_message(message.chat.id,thx.message_id)
