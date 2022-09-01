@@ -185,7 +185,7 @@ def process_id_step(message):
                 for cy in classYear:
                     c=c+1
                     URL = "https://www.aiet.edu.eg/pages/FTerm_ResultDetails_PDF_main.asp?STCode="+id+"&ClassYear="+cy+"&Dept="+dep
-                    page = requests.get(URL)
+                    page = requests.get(URL,verify=False)
                     soup = BeautifulSoup(page.content, "html.parser")
                     results = soup.find(class_="new88")
 
