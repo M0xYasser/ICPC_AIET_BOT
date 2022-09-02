@@ -414,7 +414,7 @@ def handle_process (message) :
         status = response.json()["status"]
         if (status =="OK"):
             wks.update('H'+str(x),message.text)
-            bot.reply_to(message, "done")
+            bot.reply_to(message, "Added successfully ✅")
         else :
             err="""
     ❌ حدث خطأ غير متوقع 
