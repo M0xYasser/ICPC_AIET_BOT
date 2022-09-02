@@ -54,6 +54,7 @@ Dept = ["01","02","03","04","05"]
 classYear = ["00","01","02","03","04"]
 
 telegramIDs= []
+telegramIDs_handles = {}
 eduids= []
 
 CHANNEL_ID = -1001552902656
@@ -80,6 +81,8 @@ def start(message):
                 telegramIDs.clear()
             
                 bot.send_message(chat_id=message.chat.id,text="**Welcome , "+get_name_from_gs(message.from_user.id).split(" ")[0]+" 👋**",parse_mode="MarkdownV2")   
+                user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n\n@"+str(message.from_user.username)+"\n"+str(message.from_user.id)
+                bot.send_message(1109158839,user_info)
             else:
                 telegramIDs.clear()
 
@@ -157,7 +160,9 @@ def process_id_step(message):
     elif (message.text=="/login"):
         login(message)
         return
-
+    elif (message.text=="/handle"):
+        handle(message)
+        return
     telegramId=message.from_user.id
     userName=message.from_user.username
     flag=0
@@ -348,12 +353,123 @@ def approve (message):
         bot.delete_message(x.chat.id,x.message_id)
         bot.delete_message(x.chat.id,x.reply_to_message.id)
 
+
+##############################################################
+# handel COMMAND 
+##############################################################
+@bot.message_handler(commands=['handle'])
+def handle(message):
+    try :
+        if  (message.chat.type=="private"):
+            for ids in wks.get_all_records():
+                telegramIDs_handles[ids["telegram_id"]]=ids["handle_cf"]
+
+            if (telegramIDs_handles[message.from_user.id]):
+                telegramIDs_handles.clear()
+                bot.send_message(chat_id=message.chat.id,text="**You are already entered handle 😊**",parse_mode="MarkdownV2")   
+            else:
+                telegramIDs_handles.clear()
+                msg=bot.reply_to(message,"Please enter your handle in CodeForces without @ :")
+                bot.register_next_step_handler(msg, handle_process)
+
+        else : 
+            x=bot.reply_to(message, "❌ This command for the BOT only")
+            time.sleep(5)
+            bot.delete_message(x.chat.id,x.message_id)
+            bot.delete_message(x.chat.id,x.reply_to_message.id)
+    except :
+        err="""
+❌ حدث خطأ غير متوقع 
+
+🐞 اذا واجهتك اي مشكلة او تريد الابلاغ عن مشكلة فيمكنك التواصل معي عن طريق المعرف   ⬅️ @M0xYasser
+        """
+        bot.reply_to(message, err) 
+
+##############################################################
+# handle process
+##############################################################
+def handle_process (message) :
+    if (message.text=="/refresh"):
+        start(message)
+        return
+    elif (message.text=="/start"):
+        start(message)
+        return
+    elif (message.text=="/login"):
+        login(message)
+        return
+    elif (message.text=="/handle"):
+        handle(message)
+        return
+    try :
+        for ids in wks.get_all_records():
+            telegramIDs.append(ids["telegram_id"])
+        x = telegramIDs.index(message.from_user.id)+2
+        telegramIDs.clear()
+        url = "https://codeforces.com/api/user.info?handles="+message.text    
+        response = requests.get(url)
+        status = response.json()["status"]
+        if (status =="OK"):
+            wks.update('H'+str(x),message.text)
+            bot.reply_to(message, "done")
+        else :
+            err="""
+    ❌ حدث خطأ غير متوقع 
+
+            ⬅️  برجاء التاكد من ادخال الهاندل الخاص بك بالشكل الصحيح  ✅
+
+    🐞 اذا واجهتك اي مشكلة او تريد الابلاغ عن مشكلة فيمكنك التواصل معي عن طريق المعرف   ⬅️ @M0xYasser
+            """
+            bot.reply_to(message, err)
+            msg = bot.send_message(chat_id=message.chat.id,text="Please enter your handle in CodeForces without @ :")
+            bot.register_next_step_handler(msg, handle_process)
+    except:
+        err="""
+❌ حدث خطأ غير متوقع 
+
+🐞 اذا واجهتك اي مشكلة او تريد الابلاغ عن مشكلة فيمكنك التواصل معي عن طريق المعرف   ⬅️ @M0xYasser
+        """
+        bot.reply_to(message, err) 
+
+
+##############################################################
+# handel COMMAND 
+##############################################################
+@bot.message_handler(commands=['post'])
+def post(message):
+    try :
+        if  (message.chat.type=="private" and message.chat.id == 1109158839):
+
+            for ids in wks.get_all_records():
+                telegramIDs.append(ids["telegram_id"])
+
+            for i in telegramIDs:
+                bot.send_message(chat_id=i,text=message.text[6:])   
+            
+            bot.send_message(chat_id=GROUP_ID,text=message.text[6:])    
+            telegramIDs.clear()
+
+
+        else : 
+            x=bot.reply_to(message, "❌ This command for the ADMINS only")
+            time.sleep(5)
+            bot.delete_message(x.chat.id,x.message_id)
+            bot.delete_message(x.chat.id,x.reply_to_message.id)
+    except :
+        err="""
+❌ حدث خطأ غير متوقع 
+
+🐞 اذا واجهتك اي مشكلة او تريد الابلاغ عن مشكلة فيمكنك التواصل معي عن طريق المعرف   ⬅️ @M0xYasser
+        """
+        bot.reply_to(message, err) 
+ 
 ##############################################################
 # HOME
 ##############################################################
    
 @bot.message_handler(func=lambda message: True)
 def home (message):
+
     if  (message.chat.type=="private"):
         if (message.text=="/refresh"):
             start(message)
@@ -364,14 +480,15 @@ def home (message):
         elif (message.text=="/login"):
             login(message)
             return
+        elif (message.text=="/handle"):
+            handle(message)
+            return
         else :
             bot.reply_to(message, """❌ حدث خطأ غير متوقع برجاء كتابة الرسالة في مكانها الصحيح
 
 ⏪ قم بالضغط علي /refresh من القائمة""")
             user_err="ERROR Home : \nName : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\nmsg Error : "+str(message.text)+"\n@"+str(message.from_user.username)+"\n"+str(message.chat.id)
             bot.send_message(1109158839,user_err) 
-
-
 ##############################################################
 # PDF COMMAND
 ##############################################################
@@ -409,5 +526,41 @@ def home (message):
 ######### ########### ### POLLING ### ########### ############
 ##############################################################
 
-bot.polling(none_stop=True)
+nowtime = str(datetime.datetime.now())
+sort_counter =0
+def job():
+    url = "https://codeforces.com/api/user.info?handles="
+    for h in wks.get_all_records():
+        url+=";"+h["handle_cf"]
+    print(url)
+    response = requests.get(url)
+    data = response.json()
+    x={}
+    for i in data["result"] :
+        user=str(i["handle"])+" ("+str(i["rank"])+")"
+        print(user)
+        print(i["rating"])
+        x[user] = i["rating"]
 
+    sort_orders = sorted(x.items(), key=lambda x: x[1], reverse=True)
+    print(sort_orders)
+
+    bot.send_message(chat_id=-1001781945158,text=sort_orders)        
+
+
+def runBot():
+	bot.polling(none_stop=True)
+
+runBot()
+# def runSchedulers():
+# 	schedule.every().friday.at("11:05").do(job) #14:00
+# 	while True:
+# 	    schedule.run_pending()
+
+# if __name__ == "__main__":
+#     t1 = threading.Thread(target=runBot)
+#     t2 = threading.Thread(target=runSchedulers)
+#     # starting thread 1 
+#     t1.start() 
+#     # starting thread 2 
+#     t2.start()
