@@ -186,32 +186,32 @@ def process_id_step(message):
             eduids.clear()
             m=bot.reply_to(message, "This email has already been used ..")
 
-        elif (id=="11-1-11"):
-            m=bot.reply_to(message, "Waitting ...")
-            nameStudent = "هشام الحسيني"
-            bot.edit_message_text(chat_id=message.chat.id,text="██████████ 100%",message_id=m.message_id)  
-            bot.edit_message_text(chat_id=message.chat.id,text="**Welcome Coah, "+nameStudent.split(" ")[0]+" "+nameStudent.split(" ")[1]+" 👋**",parse_mode="MarkdownV2",message_id=m.message_id)
-            wks.insert_row([telegramId,userName,eduEmail,id,nameStudent,0,0],2)
-            links = """Congratulations! 🎉👏
+        #elif (id=="11-1-11"):
+           # m=bot.reply_to(message, "Waitting ...")
+          #  nameStudent = "هشام الحسيني"
+           # bot.edit_message_text(chat_id=message.chat.id,text="██████████ 100%",message_id=m.message_id)  
+          #  bot.edit_message_text(chat_id=message.chat.id,text="**Welcome Coah, "+nameStudent.split(" ")[0]+" "+nameStudent.split(" ")[1]+" 👋**",parse_mode="MarkdownV2",message_id=m.message_id)
+           # wks.insert_row([telegramId,userName,eduEmail,id,nameStudent,0,0],2)
+          #  links = """Congratulations! 🎉👏
 
-Your login has been accepted by the admin.
+#Your login has been accepted by the admin.
 
-We have 3 way for communications.
+#We have 3 way for communications.
 
-1- Main channel: 
-https://t.me/icpcaiet
+#1- Main channel: 
+#https://t.me/icpcaiet
 
-2- Community group:
-https://t.me/+hrrAxNNNkyUyMGI0
-< Please request to join >
+#2- Community group:
+#https://t.me/+hrrAxNNNkyUyMGI0
+#< Please request to join >
 
-3- Questions & Problems channel:
-https://t.me/+mGFOCOMix1cyYzA0
+#3- Questions & Problems channel:
+#https://t.me/+mGFOCOMix1cyYzA0
 
-- - -
+#- - -
 
-Thanks 🙏"""
-            bot.send_message(chat_id=message.chat.id,text=links)
+#Thanks 🙏"""
+            #bot.send_message(chat_id=message.chat.id,text=links)
 
         else :
             eduids.clear()
