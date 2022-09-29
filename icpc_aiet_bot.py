@@ -166,6 +166,9 @@ def process_id_step(message):
     elif (message.text=="/handle"):
         handle(message)
         return
+    elif (message.text=="/old"):
+        old(message)
+        return
     telegramId=message.from_user.id
     userName=message.from_user.username
     flag=0
@@ -383,7 +386,39 @@ def approve (message):
         bot.delete_message(x.chat.id,x.message_id)
         bot.delete_message(x.chat.id,x.reply_to_message.id)
 
+##############################################################
+# old COMMAND 
+##############################################################
+@bot.message_handler(commands=['old'])
+def old(message):
+    oldMsg="""Traning old group:
+https://t.me/+l8MCwhWfr5MyNmQ0
+< Please request to join >
+"""
+    suc="""You have been registered successfully ✅
+Your information will be reviewed and accepted ✔️"""
+    try :
+        if  (message.chat.type=="private" ):
+            for ids in wks.get_all_records():
+                telegramIDs.append(ids["telegram_id"])
+            x = telegramIDs.index(message.from_user.id)+2
+            wks.update('I'+str(x),1)
+            bot.reply_to(message, oldMsg)
+            bot.send_message(chat_id=message.chat.id,text=suc)
+            user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n"+get_name_from_gs(message.from_user.id)+"\n2021 >> "+str(y2021)+" & 2022 >> "+str(y2022)+"\n@"+str(message.from_user.username)
+            bot.send_message(1109158839,user_info)
+        else : 
+            x=bot.reply_to(message, "❌ This command for the BOT only")
+            time.sleep(5)
+            bot.delete_message(x.chat.id,x.message_id)
+            bot.delete_message(x.chat.id,x.reply_to_message.id)
+    except :
+        err="""
+❌ حدث خطأ غير متوقع 
 
+🐞 اذا واجهتك اي مشكلة او تريد الابلاغ عن مشكلة فيمكنك التواصل معي عن طريق المعرف   ⬅️ @M0xYasser
+        """
+        bot.reply_to(message, err) 
 ##############################################################
 # handel COMMAND 
 ##############################################################
@@ -430,6 +465,9 @@ def handle_process (message) :
         return
     elif (message.text=="/handle"):
         handle(message)
+        return
+    elif (message.text=="/old"):
+        old(message)
         return
     try :
         for ids in wks.get_all_records():
@@ -487,11 +525,12 @@ def post(message):
             bot.delete_message(x.chat.id,x.reply_to_message.id)
     except :
         err="""
-❌ حدث خطأ غير متوقع 
+❌ حدث خطأ غير متوقع
 
 🐞 اذا واجهتك اي مشكلة او تريد الابلاغ عن مشكلة فيمكنك التواصل معي عن طريق المعرف   ⬅️ @M0xYasser
         """
         bot.reply_to(message, err) 
+
  
 ##############################################################
 # HOME
@@ -512,6 +551,9 @@ def home (message):
             return
         elif (message.text=="/handle"):
             handle(message)
+            return
+        elif (message.text=="/old"):
+            old(message)
             return
         else :
             bot.reply_to(message, """❌ حدث خطأ غير متوقع برجاء كتابة الرسالة في مكانها الصحيح
