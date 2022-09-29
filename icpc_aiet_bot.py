@@ -405,7 +405,8 @@ Your information will be reviewed and accepted ✔️"""
             wks.update('I'+str(x),1)
             bot.reply_to(message, oldMsg)
             bot.send_message(chat_id=message.chat.id,text=suc)
-            user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n"+get_name_from_gs(message.from_user.id)+"\n2021 >> "+str(y2021)+" & 2022 >> "+str(y2022)+"\n@"+str(message.from_user.username)
+            user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n"+get_name_from_gs(message.from_user.id)+"\n@"+str(message.from_user.username)
+            #print(user_info)
             bot.send_message(1109158839,user_info)
         else : 
             x=bot.reply_to(message, "❌ This command for the BOT only")
