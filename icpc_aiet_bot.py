@@ -169,6 +169,9 @@ def process_id_step(message):
     elif (message.text=="/old"):
         old(message)
         return
+    elif (message.text=="/TechSummit"):
+        booking(message)
+        return
     telegramId=message.from_user.id
     userName=message.from_user.username
     flag=0
@@ -249,7 +252,9 @@ def process_id_step(message):
 If in 2021 send number 1
 If in 2022 send number 2
 If you participated in the two years, send number 3
-And if you haven't participated before, send number 4"""
+If you haven't participated before, send number 4
+And if you were a volunteer before, send number 5
+"""
                         msg = bot.send_message(chat_id=message.chat.id,text=pollq)
                         bot.register_next_step_handler(msg, poll)
                         flag=1
@@ -274,17 +279,21 @@ And if you haven't participated before, send number 4"""
 ##############################################################
  
 def poll (message):
-    global y2021,y2022
+    global y2021,y2022,v
     try :
         if (message.text == '1' or message.text == '١'):
             y2021=1
-            y2022=0
+            y2022=v=0
         elif (message.text == '2' or message.text == '٢'):
             y2022=1
-            y2021=0
+            y2021=v=0
         elif (message.text == '3' or message.text == '٣'):
             y2021=y2022=1
+            v=0
         elif (message.text == '4' or message.text == '٤'):
+            y2021=y2022=v=0
+        elif (message.text == '5' or message.text == '٥'):
+            v=1
             y2021=y2022=0
         else :
             errr=x/0
@@ -294,6 +303,7 @@ def poll (message):
         telegramIDs.clear()
         wks.update('F'+str(x),y2021)
         wks.update('G'+str(x),y2022)
+        wks.update('L'+str(x),v)
         links = """Congratulations! 🎉👏
 
 Your login has been accepted by the admin.
@@ -314,7 +324,7 @@ https://t.me/+mGFOCOMix1cyYzA0
 
 Thanks 🙏"""
         bot.send_message(chat_id=message.chat.id,text=links)
-        user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n"+get_name_from_gs(message.from_user.id)+"\n2021 >> "+str(y2021)+" & 2022 >> "+str(y2022)+"\n@"+str(message.from_user.username)
+        user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n"+get_name_from_gs(message.from_user.id)+"\n2021 >> "+str(y2021)+" & 2022 >> "+str(y2022)+" & volunteer >>"+str(v)+"\n@"+str(message.from_user.username)
         bot.send_message(1109158839,user_info)
         bot.send_message(753971845,user_info)
     except :
@@ -420,6 +430,69 @@ Your information will be reviewed and accepted ✔️"""
 🐞 اذا واجهتك اي مشكلة او تريد الابلاغ عن مشكلة فيمكنك التواصل معي عن طريق المعرف   ⬅️ @M0xYasser
         """
         bot.reply_to(message, err) 
+
+
+##############################################################
+# Tech Summit COMMAND
+##############################################################
+
+@bot.message_handler(commands=['TechSummit'])
+def booking (message):
+    try : 
+        if  (message.chat.type=="private"):
+            for ids in wks.get_all_records():
+                telegramIDs.append(ids["telegram_id"])
+            if (message.from_user.id in telegramIDs):
+                x = telegramIDs.index(message.from_user.id)+2
+                telegramIDs.clear()
+                if (wks.cell(x,11).value is None):
+                    bot.reply_to(message ,"Now you can book a Tech Summit's ticket 🤍")
+                    phone=bot.send_message(chat_id=message.chat.id,text="Please Enter Your Phone Number (Whatsapp) :")
+                    bot.register_next_step_handler(phone, setPhone)
+                else:
+                    bot.reply_to(message,"You have already booked 🙃")
+                
+            else :
+                telegramIDs.clear()
+                bot.reply_to(message,text="You are not logged in the bot yet 😢\nLogin >> @ICPCAIET_bot")   
+                
+    except :
+        err="""
+❌ حدث خطأ غير متوقع 
+
+🐞 اذا واجهتك اي مشكلة او تريد الابلاغ عن مشكلة فيمكنك التواصل معي عن طريق المعرف   ⬅️ @M0xYasser
+        """
+        bot.reply_to(message, err)
+##############################################################
+#  SET PHONE 
+##############################################################
+def setPhone (message):
+    if (message.text=="/refresh"):
+        start(message)
+        return
+    elif (message.text=="/start"):
+        start(message)
+        return
+    elif (message.text=="/login"):
+        login(message)
+        return
+    elif (message.text=="/handle"):
+        handle(message)
+        return
+    elif (message.text=="/old"):
+        old(message)
+        return
+    elif (message.text=="/TechSummit"):
+        booking(message)
+        return
+    for ids in wks.get_all_records():
+        telegramIDs.append(ids["telegram_id"])
+    x = telegramIDs.index(message.from_user.id)+2
+    telegramIDs.clear()
+    wks.update('k'+str(x),str(message.text))
+    bot.reply_to(message,"""Your seat on the waiting list has been reserved ✅
+We will confirm your reservation as soon as possible 🙏""")
+
 ##############################################################
 # handel COMMAND 
 ##############################################################
@@ -470,6 +543,9 @@ def handle_process (message) :
     elif (message.text=="/old"):
         old(message)
         return
+    elif (message.text=="/TechSummit"):
+        booking(message)
+        return
     try :
         for ids in wks.get_all_records():
             telegramIDs.append(ids["telegram_id"])
@@ -502,7 +578,7 @@ def handle_process (message) :
 
 
 ##############################################################
-# handel COMMAND 
+# post COMMAND 
 ##############################################################
 @bot.message_handler(commands=['post'])
 def post(message):
@@ -555,6 +631,9 @@ def home (message):
             return
         elif (message.text=="/old"):
             old(message)
+            return
+        elif (message.text=="/TechSummit"):
+            booking(message)
             return
         else :
             bot.reply_to(message, """❌ حدث خطأ غير متوقع برجاء كتابة الرسالة في مكانها الصحيح
