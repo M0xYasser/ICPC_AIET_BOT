@@ -169,7 +169,7 @@ def process_id_step(message):
     elif (message.text=="/old"):
         old(message)
         return
-    elif (message.text=="/TechSummit"):
+    elif (message.text=="/tech_summit"):
         booking(message)
         return
     telegramId=message.from_user.id
@@ -436,7 +436,7 @@ Your information will be reviewed and accepted ✔️"""
 # Tech Summit COMMAND
 ##############################################################
 
-@bot.message_handler(commands=['TechSummit'])
+@bot.message_handler(commands=['tech_summit'])
 def booking (message):
     try : 
         if  (message.chat.type=="private"):
@@ -482,7 +482,7 @@ def setPhone (message):
     elif (message.text=="/old"):
         old(message)
         return
-    elif (message.text=="/TechSummit"):
+    elif (message.text=="/tech_summit"):
         booking(message)
         return
     for ids in wks.get_all_records():
@@ -543,7 +543,7 @@ def handle_process (message) :
     elif (message.text=="/old"):
         old(message)
         return
-    elif (message.text=="/TechSummit"):
+    elif (message.text=="/tech_summit"):
         booking(message)
         return
     try :
@@ -632,7 +632,7 @@ def home (message):
         elif (message.text=="/old"):
             old(message)
             return
-        elif (message.text=="/TechSummit"):
+        elif (message.text=="/tech_summit"):
             booking(message)
             return
         else :
