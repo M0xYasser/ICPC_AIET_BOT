@@ -455,7 +455,11 @@ def booking (message):
             else :
                 telegramIDs.clear()
                 bot.reply_to(message,text="You are not logged in the bot yet 😢\nLogin >> @ICPCAIET_bot")   
-                
+        else : 
+            x=bot.reply_to(message, "❌ This command for the BOT only")
+            time.sleep(5)
+            bot.delete_message(x.chat.id,x.message_id)
+            bot.delete_message(x.chat.id,x.reply_to_message.id)
     except :
         err="""
 ❌ حدث خطأ غير متوقع 
