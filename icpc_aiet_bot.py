@@ -4,48 +4,30 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import gspread
-# import schedule
-import datetime
 import time
-# import threading
 
 ##############################################################
 # Connect with Google Sheet
 ##############################################################
 
 credentials ={
-  "type": "service_account",
-  "project_id": "icpcaiet-m0xyasser",
-  "private_key_id": "4af8cb6af7eda74883798ca21708f98308ac6932",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCpQeO6fxvsXt4V\ntL7MIuiTtHaHs5y194AbiCpDYsrxeJndQlY6/knNbCubpOSmqjbOTOTAX4qAnO7Z\nFXsk0DTjaKtwyjop588JfXpwxBGfctB/FcvTmlgEv3DWL5/rn1zTpjsccqRY2DEt\n8iAmBb1nXK2Djs2FFvo23Ccn7+XKB1bNg9bERP+8jonmuNa3f/iJR+x4vgM5S1wS\nd7HO4FBIEOmY57JXNt9mifcQka/Uyw3Aevr7ygCWrUss+XIwy4j6bIAAp5vWuB4D\nraNG4QAEkDj/88zuuoZok4ebsnD16r8OfuvFQhn7XaJHxWdqrZH3g6L6vsSGuSl1\n1qLGk8nBAgMBAAECggEAAQ0Ws/bMHpisOmhH8w6YcSpivg8AfyTNV95tnMOFTSCZ\nnAUoce9YV/0+/BV3Eg3mjzttBEDTpF7VIOYAQMdGPM9OmUG4QMBeyclMtFyTW3Ek\nGFXzURoZR9ZEhh//l0ADHJFgtpmDqcWV8JobVwEcHwM1VKbTYes1nJebaqUTwUBt\nz1KJlpbu0I2EWuDqWJSeiNj64YIEb3ew9MEq1gOyenQuqjBThkmFQHppyRQoCmj2\ndMtLrtGOUYvFcE3xw3Jrs9CuC07ziqF/kkCZHXP0GCcLCPEhsylihiy4NalfMrOl\nfZbtk3Lh68/lvV2C4WHRJ4Bonsjkl+iicISHd92G3QKBgQDsbOtnch6fvu1UBfTC\n2H5cCyTL2Zq83aIEb8X3Fzd3QrzVY3hkh+q0CLlAovAZ/lasLMoFkuGDMLcXMUuO\njTcisiFxYMuT9V48Mfeqz/2kMqwk/2Uo9+q2zCAYcJK3eSayx6snYuAABilvI0/L\ngYRR6F0TgSkMIuQ9+YIcYgl7/wKBgQC3RVSPUdJ29T6EQNTrTbsXe0wuyBYaBgnw\n1E6bJ0juT8NWBQIKHya4QvqwdTc13+MrAevIrfJ3rFo496oSkTkaBqM0XxN5/aF1\nyg5tbMf3vk5CjprRES0ZevYF4w2ScYqwS5iJpqev2aRxP1kmWzL6CmTBCzA28TYx\n1ku6Wdm6PwKBgCQV/9w7M+doCetgOVqgFrFP1h7zKMYZAgixUsMDHSkr24yqcQ7P\nHAi8qCHwfLtK8cm30GIHaDpQ7jExCfpJHZhDHg2jG4+KzQZdDhNZSbqNLW88OCGH\nraCXCXMRg6NTb4+sIDiTw+LdDefzuNM0ApFJ6SL3/N7oWHQJKE3SvOXbAoGACv4q\nm0oiIKaHMHGfE9oevcLUh/3SbY8tK3fgmyfZFQpNwiwcujSyIt1Join1vNKIEr1T\nwj7Ey27YHpCkb+asESaSxYJqbafL9n+/K8sZl3+fvBhHqwCnvt6EQUgkOUN8OSTf\nqmoHpuGcHnrZQxa3UQ4sivO72Z/QS176PdxD1gsCgYAQ9MO5sHfbRCif/UvrevQr\nN+56cUjCzSz3axS+X+MD56b1waNHyuPBH5tsEYqa5KOz4NaaiYT4wWUzERVZl4DJ\n0du8S3zP4DOqQYxcOeqBLMdAx97HfX0Fl7+o/hDBoxJze6kvs6KCrsRyEJ9vOCxa\n7pCSuL9qcP+1Fs2A6tM1kQ==\n-----END PRIVATE KEY-----\n",
-  "client_email": "icpc-aiet@icpcaiet-m0xyasser.iam.gserviceaccount.com",
-  "client_id": "108133124642024233747",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/icpc-aiet%40icpcaiet-m0xyasser.iam.gserviceaccount.com"
+  ####################################
+  ####### SECRET   CREDENTIALS #######
+  ####################################
 }
 sa = gspread.service_account_from_dict(credentials)
 
-sh = sa.open("Icpc_Aiet_Bot_DB")
+sh = sa.open("""DATABASE NAME""")
 
-wks = sh.worksheet("DB1")
+wks = sh.worksheet("""WORK SHEET NAME""")
 
 ##############################################################
 # INFO OF BOT
 ##############################################################
 
-API_TOKEN="5780490291:AAGGeitkEkTehmDzuYKbTDGwgJ3dSNuSbhU"
+API_TOKEN= ### SECRET telegram API KEY ###
 
 bot = telebot.TeleBot(API_TOKEN, parse_mode=None) 
-
-##############################################################
-# Markup
-##############################################################
-
-# markup = types.ReplyKeyboardMarkup(row_width=1)
-# itembtn = types.KeyboardButton("Refresh 🔄")
-# markup.add(itembtn)
 
 ##############################################################
 # VARIABLES & FUNCTION DECLERATION
@@ -60,10 +42,10 @@ telegramIDs= []
 telegramIDs_handles = {}
 eduids= []
 
-CHANNEL_ID = -1001552902656
-GROUP_ID = -1001678558758
-GROUP_ID2 =-1001580029987
-PROBLEMC_ID =-1001558986488
+CHANNEL_ID =  ### SECRET  CHANNEL_ID ###
+GROUP_ID =    ### SECRET    GROUP_ID ###
+GROUP_ID2 =   ### SECRET    GROUP_ID ###
+PROBLEMC_ID = ### SECRET PROBLEMC_ID ###
 
 def get_name_from_gs (telegram_id):
     for ids in wks.get_all_records():
@@ -85,7 +67,7 @@ def start(message):
             
                 bot.send_message(chat_id=message.chat.id,text="**Welcome , "+get_name_from_gs(message.from_user.id).split(" ")[0]+" 👋**",parse_mode="MarkdownV2")   
                 user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n\n@"+str(message.from_user.username)+"\n"+str(message.from_user.id)
-                bot.send_message(1109158839,user_info)
+                bot.send_message("""SECRET Telegram ID""",user_info)
             else:
                 telegramIDs.clear()
 
@@ -97,14 +79,12 @@ Please follow the instructions :
 
 2️⃣ If the message is not answered, choose /refresh from the menu.
 
-For any problem faced you please contact direct with @ElsayedDev2
-
 - - -
 
 This bot built with ❤️ by @M0xYasser"""
                 bot.reply_to(message,welcome_msg)
                 user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n\n@"+str(message.from_user.username)+"\n"+str(message.from_user.id)
-                bot.send_message(1109158839,user_info)
+                bot.send_message("""SECRET Telegram ID""",user_info)
         else : 
             x=bot.reply_to(message, "❌ This command for the BOT only")
             time.sleep(5)
@@ -191,33 +171,6 @@ def process_id_step(message):
         if (id in eduids):
             eduids.clear()
             m=bot.reply_to(message, "This email has already been used ..")
-
-        #elif (id=="11-1-11"):
-           # m=bot.reply_to(message, "Waitting ...")
-          #  nameStudent = "هشام الحسيني"
-           # bot.edit_message_text(chat_id=message.chat.id,text="██████████ 100%",message_id=m.message_id)  
-          #  bot.edit_message_text(chat_id=message.chat.id,text="**Welcome Coah, "+nameStudent.split(" ")[0]+" "+nameStudent.split(" ")[1]+" 👋**",parse_mode="MarkdownV2",message_id=m.message_id)
-           # wks.insert_row([telegramId,userName,eduEmail,id,nameStudent,0,0],2)
-          #  links = """Congratulations! 🎉👏
-
-#Your login has been accepted by the admin.
-
-#We have 3 way for communications.
-
-#1- Main channel: 
-#https://t.me/icpcaiet
-
-#2- Community group:
-#https://t.me/+hrrAxNNNkyUyMGI0
-#< Please request to join >
-
-#3- Questions & Problems channel:
-#https://t.me/+mGFOCOMix1cyYzA0
-
-#- - -
-
-#Thanks 🙏"""
-            #bot.send_message(chat_id=message.chat.id,text=links)
 
         else :
             eduids.clear()
@@ -325,8 +278,7 @@ https://t.me/+mGFOCOMix1cyYzA0
 Thanks 🙏"""
         bot.send_message(chat_id=message.chat.id,text=links)
         user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n"+get_name_from_gs(message.from_user.id)+"\n2021 >> "+str(y2021)+" & 2022 >> "+str(y2022)+" & volunteer >>"+str(v)+"\n@"+str(message.from_user.username)
-        bot.send_message(1109158839,user_info)
-        bot.send_message(753971845,user_info)
+        bot.send_message("""SECRET Telegram ID""",user_info)
     except :
         err="""
 ❌ حدث خطأ غير متوقع 
@@ -417,7 +369,8 @@ Your information will be reviewed and accepted ✔️"""
             bot.send_message(chat_id=message.chat.id,text=suc)
             user_info="Name : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\n"+get_name_from_gs(message.from_user.id)+"\n@"+str(message.from_user.username)
             #print(user_info)
-            bot.send_message(1109158839,user_info)
+            # Put your telegram Id to get notification when user login
+            bot.send_message("""Your Telegram ID""",user_info)
         else : 
             x=bot.reply_to(message, "❌ This command for the BOT only")
             time.sleep(5)
@@ -582,38 +535,6 @@ def handle_process (message) :
 
 
 ##############################################################
-# post COMMAND 
-##############################################################
-@bot.message_handler(commands=['post'])
-def post(message):
-    try :
-        if  (message.chat.type=="private" and message.chat.id == 1109158839):
-
-            for ids in wks.get_all_records():
-                telegramIDs.append(ids["telegram_id"])
-
-            for i in telegramIDs:
-                bot.send_message(chat_id=i,text=message.text[6:])   
-            
-            bot.send_message(chat_id=GROUP_ID,text=message.text[6:])    
-            telegramIDs.clear()
-
-
-        else : 
-            x=bot.reply_to(message, "❌ This command for the ADMINS only")
-            time.sleep(5)
-            bot.delete_message(x.chat.id,x.message_id)
-            bot.delete_message(x.chat.id,x.reply_to_message.id)
-    except :
-        err="""
-❌ حدث خطأ غير متوقع
-
-🐞 اذا واجهتك اي مشكلة او تريد الابلاغ عن مشكلة فيمكنك التواصل معي عن طريق المعرف   ⬅️ @M0xYasser
-        """
-        bot.reply_to(message, err) 
-
- 
-##############################################################
 # HOME
 ##############################################################
    
@@ -644,79 +565,15 @@ def home (message):
 
 ⏪ قم بالضغط علي /refresh من القائمة""")
             user_err="ERROR Home : \nName : "+str(message.from_user.first_name)+" "+str(message.from_user.last_name)+"\nmsg Error : "+str(message.text)+"\n@"+str(message.from_user.username)+"\n"+str(message.chat.id)
-            bot.send_message(1109158839,user_err) 
-##############################################################
-# PDF COMMAND
-##############################################################
+            bot.send_message("""SECRET Telegram ID""",user_err)
 
-# @bot.message_handler(commands=['contest1682020'])
-# def pdf(message):
-    # if  (message.chat.type=="private"):
-    #     for ids in wks.get_all_records():
-    #         telegramIDs.append(ids["telegram_id"])
-    #     if (message.from_user.id in telegramIDs):
-    #         telegramIDs.clear()
-    #         bot.send_document(message.chat.id,"BQACAgQAAxkBAAIB5WMMasyNwS4klKVnmY8HVkR85JbtAAJLDgAC1OlhUJJMT_9X5XCBKQQ")
-    #     else :
-    #         telegramIDs.clear()
-    #         s=bot.send_message(chat_id=message.chat.id,text="You are not logged in the bot yet 😢\nLogin >> @ICPC_AIET_BOT")   
-    #         time.sleep(5)
-    #         bot.delete_message(s.chat.id,message.message_id)
-    #         bot.delete_message(s.chat.id,s.message_id)
-    # else:
-    #     for ids in wks.get_all_records():
-    #         telegramIDs.append(ids["telegram_id"])
-    #     if (message.from_user.id in telegramIDs):
-    #         telegramIDs.clear()
-    #         bot.send_message(message.chat.id, "here", reply_to_message_id=22)
-    #         time.sleep(5)
-    #         bot.delete_message(message.chat.id,message.message_id)
-    #     else :
-    #         telegramIDs.clear()
-    #         s=bot.send_message(chat_id=message.chat.id,text="You are not logged in the bot yet 😢\nLogin >> @ICPC_AIET_BOT")   
-    #         time.sleep(5)
-    #         bot.delete_message(s.chat.id,message.message_id)
-    #         bot.delete_message(s.chat.id,s.message_id)
 
 ##############################################################
 ######### ########### ### POLLING ### ########### ############
 ##############################################################
 
-nowtime = str(datetime.datetime.now())
-sort_counter =0
-def job():
-    url = "https://codeforces.com/api/user.info?handles="
-    for h in wks.get_all_records():
-        url+=";"+h["handle_cf"]
-    print(url)
-    response = requests.get(url)
-    data = response.json()
-    x={}
-    for i in data["result"] :
-        user=str(i["handle"])+" ("+str(i["rank"])+")"
-        print(user)
-        print(i["rating"])
-        x[user] = i["rating"]
-
-    sort_orders = sorted(x.items(), key=lambda x: x[1], reverse=True)
-    print(sort_orders)
-
-    bot.send_message(chat_id=-1001781945158,text=sort_orders)        
-
-
 def runBot():
 	bot.polling(none_stop=True)
 
 runBot()
-# def runSchedulers():
-# 	schedule.every().friday.at("11:05").do(job) #14:00
-# 	while True:
-# 	    schedule.run_pending()
 
-# if __name__ == "__main__":
-#     t1 = threading.Thread(target=runBot)
-#     t2 = threading.Thread(target=runSchedulers)
-#     # starting thread 1 
-#     t1.start() 
-#     # starting thread 2 
-#     t2.start()
