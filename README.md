@@ -52,5 +52,5 @@
 
 ### 5. Handle
 
-<img src="https://user-images.githubusercontent.com/47388207/210206907-8a3fcea6-ad83-4d10-986c-c62fe6e17612.jpg" height="300" />
+<img src="https://user-images.githubusercontent.com/47388207/210206907-8a3fcea6-ad83-4d10-986c-c62fe6e17612.jpg" height="250" />
 
