@@ -1,4 +1,4 @@
-# ICPC_AIET_BOT
+# ICPC AIET BOT
 
 ## Required Packages (PYTHON)
 
@@ -33,24 +33,24 @@
 
 ### 1. Start
 
-![start](https://user-images.githubusercontent.com/47388207/210206763-ee58b6b3-901e-4ba8-aafb-8cdd9576b65d.jpg)
+<img src="https://user-images.githubusercontent.com/47388207/210206763-ee58b6b3-901e-4ba8-aafb-8cdd9576b65d.jpg" height="300" />
 
 ### 2. Login
 
 | Scraping the name | After scraping |
 |:---:|:---:|
-| ![LOGIN](https://user-images.githubusercontent.com/47388207/210206845-f7e1fad3-6334-428f-a503-b0a5e96e3acf.jpg) | ![login](https://user-images.githubusercontent.com/47388207/210206855-4287f8f3-34ee-4e76-822f-5aa79614060a.jpg)|
+| <img src="https://user-images.githubusercontent.com/47388207/210206845-f7e1fad3-6334-428f-a503-b0a5e96e3acf.jpg" height="300" /> | <img src="https://user-images.githubusercontent.com/47388207/210206855-4287f8f3-34ee-4e76-822f-5aa79614060a.jpg" height="500" />|
 
 
 ### 3. Tech_summit
 
-![tech](https://user-images.githubusercontent.com/47388207/210206878-88184d28-455a-4798-ac33-ccef190fe5e9.jpg)
+<img src="https://user-images.githubusercontent.com/47388207/210206878-88184d28-455a-4798-ac33-ccef190fe5e9.jpg" height="300" />
 
 ### 4. Old
 
-![old](https://user-images.githubusercontent.com/47388207/210206889-db1be379-9a3e-4c8c-890f-6b7f51f5931f.jpg)
+<img src="https://user-images.githubusercontent.com/47388207/210206889-db1be379-9a3e-4c8c-890f-6b7f51f5931f.jpg" height="200" />
 
 ### 5. Handle
 
-![handle](https://user-images.githubusercontent.com/47388207/210206907-8a3fcea6-ad83-4d10-986c-c62fe6e17612.jpg)
+<img src="https://user-images.githubusercontent.com/47388207/210206907-8a3fcea6-ad83-4d10-986c-c62fe6e17612.jpg" height="300" />
 
